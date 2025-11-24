@@ -21,7 +21,7 @@ router.delete('/:id',auth , teacherOnly , deleteUser) ;
 //For checking that if role is Teacher (Acting as middleware)
 
 function teacherOnly(req , res , next){
-    if(req.user.role !== 'Teacher'){
+    if(req.user.role !== 'teacher'){
         return res.status(403).json({message : 'Access denied. Teachers only.'}) ;
     }
     next();

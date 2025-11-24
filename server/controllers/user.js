@@ -9,7 +9,7 @@ module.exports = {
 
 function getStudents(req , res){
     const students = db.prepare(
-        `SELECT id , username , role FROM users WHERE role = 'Student'`
+        `SELECT id , username , role FROM users WHERE role = 'student'`
     ).all() ;
     console.log(students) ;
     res.json(students) ;
@@ -18,6 +18,7 @@ function getAllUsers(req , res){
     const users = db.prepare(
         `SELECT id , username , role FROM users`
     ).all() ;
+    console.log(users) ;
     res.json(users) ;
 }
 
@@ -27,11 +28,11 @@ function promoteUser(req , res){
     if(!user){
         return res.status(404).json({message : 'User not found'}) ;
     }
-    if(user.role === 'Teacher'){
+    if(user.role === 'teacher'){
         return res.status(400).json({message : 'User is already a Teacher'}) ;
     }
     db.prepare(
-        `UPDATE users SET role = 'Teacher' WHERE id = ?`
+        `UPDATE users SET role = 'teacher' WHERE id = ?`
     ).run(userId) ;
     res.json({message : 'User promoted to Teacher successfully'}) ;
 }

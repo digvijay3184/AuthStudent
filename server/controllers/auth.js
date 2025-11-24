@@ -18,7 +18,7 @@ const register = (req, res)=>{
         const hashedPassword = bcrypt.hashSync(password, 10) ;
         const result = db.prepare(
             `INSERT INTO users (username, password, role) VALUES (?, ?, ?)`
-        ).run(username , hashedPassword , role || 'Student') ;
+        ).run(username , hashedPassword , role || 'student') ;
         console.log(result) ;
         return res.status(201).json({message:'User registered successfully'}) ;
     }catch(err){
@@ -48,7 +48,7 @@ const login = (req, res)=>{
             process.env.JWT_SECRET ,
             {expiresIn: '2h'}
         ) ;
-        console.log(payload) ;
+        console.log(payload);
         console.log(token) ;
         return res.status(200).json({token , user: payload}) ;
     }catch(err){
